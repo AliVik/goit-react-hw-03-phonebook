@@ -3,11 +3,18 @@ import { nanoid } from "nanoid";
 import { FormTag, LabelNames, LabelWrapper, Button } from "./StyledForm";
 
 class Form extends Component {
+  state = {
+    name: "",
+    number: "",
+  };
+  onInputChange = (evt) => {
+    const { name, value } = evt.target;
+    this.setState({ [name]: value });
+  };
   onFormSubmit = (evt) => {
     evt.preventDefault();
-    const name = evt.currentTarget.elements.name.value;
-    const number = evt.currentTarget.elements.number.value;
     const form = evt.currentTarget;
+    const { name, number } = this.state;
     const id = nanoid();
 
     this.props.onSubmit({ name, id, number });
@@ -22,6 +29,7 @@ class Form extends Component {
             <LabelNames>Name</LabelNames>
             <input
               type="text"
+              onChange={this.onInputChange}
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
@@ -32,6 +40,7 @@ class Form extends Component {
             <LabelNames>Number</LabelNames>
             <input
               type="tel"
+              onChange={this.onInputChange}
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
