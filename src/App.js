@@ -8,6 +8,7 @@ import {
 import Form from "./components/Form";
 import ContactList from "./components/ContactList";
 import Filter from "./components/Filter";
+import { LackOfFriendsPhrase } from "./components/Filter/StyledFilter";
 
 class App extends Component {
   state = {
@@ -73,13 +74,22 @@ class App extends Component {
   render() {
     const { filter } = this.state;
     const filteredContacts = this.filterContactList();
+    const contactsArr = this.state.contacts;
 
     return (
       <Wrapper>
         <PhonebookHeading>Phonebook</PhonebookHeading>
         <Form onSubmit={this.handleFormDatas} />
         <ContactsHeading>Contacts</ContactsHeading>
-        <Filter value={filter} onChange={this.handleFilterDatas} />
+
+        {contactsArr.length !== 0 ? (
+          <Filter value={filter} onChange={this.handleFilterDatas} />
+        ) : (
+          <LackOfFriendsPhrase>
+            You don`t have any contact :(
+          </LackOfFriendsPhrase>
+        )}
+
         <ContactList
           contacts={filteredContacts}
           onDeleteClick={this.onDeleteBtnClick}
