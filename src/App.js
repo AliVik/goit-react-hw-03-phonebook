@@ -56,18 +56,20 @@ class App extends Component {
       };
     });
   };
-  // componentDidMount() {
-  //   const contacts = JSON.parse(localStorage.getItem("contacts"));
-  //   this.setState({ contacts });
-  // }
-  // componentDidUpdate(_, prevState) {
-  //   const previousContacts = prevState.contacts;
-  //   const currentContacts = this.state.contacts;
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem("contacts"));
+    if (contacts) {
+      this.setState({ contacts });
+    }
+  }
+  componentDidUpdate(_, prevState) {
+    const previousContacts = prevState.contacts;
+    const currentContacts = this.state.contacts;
 
-  //   if (previousContacts !== currentContacts) {
-  //     localStorage.setItem("contacts", JSON.stringify(currentContacts));
-  //   }
-  // }
+    if (previousContacts !== currentContacts) {
+      localStorage.setItem("contacts", JSON.stringify(currentContacts));
+    }
+  }
   render() {
     const { filter } = this.state;
     const filteredContacts = this.filterContactList();
