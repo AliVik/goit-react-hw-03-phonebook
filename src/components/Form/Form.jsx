@@ -61,5 +61,5 @@ class Form extends Component {
 export default Form;
 
 Form.propTypes = {
-  onFormSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
 };
