@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
 import { FormTag, LabelNames, LabelWrapper, Button } from "./StyledForm";
 
@@ -58,3 +59,7 @@ class Form extends Component {
 }
 
 export default Form;
+
+Form.propTypes = {
+  onFormSubmit: PropTypes.func,
+};
